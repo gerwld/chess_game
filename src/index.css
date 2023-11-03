@@ -25,31 +25,106 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow: scroll;
+}
+
+.board,
+.board>* {
+  -webkit-touch-callout: none;
+  /* iOS Safari */
+  -webkit-user-select: none;
+  /* Safari */
+  -khtml-user-select: none;
+  /* Konqueror HTML */
+  -moz-user-select: none;
+  /* Old versions of Firefox */
+  -ms-user-select: none;
+  /* Internet Explorer/Edge */
+  user-select: none;
+  /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
 }
 
 .board {
-  width: calc(max(10vmin, 64px) *8);
-  height: calc(max(10vmin, 64px) *8);
-  background-color: rgb(223, 226, 239);
+  width: calc(max(10vmin, 30px) *8);
+  min-width: calc(max(10vmin, 30px) *8);
+  height: calc(max(10vmin, 30px) *8);
+  min-height: calc(max(10vmin, 30px) *8);
   display: flex;
   flex-wrap: wrap;
+  background-image: url("/assets/boards/26brown.png");
+  background-position: 0% 0%;
+  background-size: 100% 100%;
 }
 
 .square {
-  width: max(10vmin, 64px);
-  height: max(10vmin, 64px);
-  background-color: blue;
+  width: max(10vmin, 30px);
+  height: max(10vmin, 30px);
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
+@media only screen and (max-width: 660px) {
+
+  .app {
+    padding-top: max(2vmin, 10px);
+    justify-content: center;
+    align-items: flex-start;
+  }
+
+  .board {
+    width: calc(max(12vmin, 30px) *8);
+    min-width: calc(max(12vmin, 30px) *8);
+    height: calc(max(12vmin, 30px) *8);
+    min-height: calc(max(12vmin, 30px) *8);
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .square {
+    width: max(12vmin, 30px);
+    height: max(12vmin, 30px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+}
+
 .square.black {
-  background-color: #000;
+  /* background-color: #000; */
 }
 
 .square.white {
-  background-color: #fff;
+  /* background-color: #fff; */
+}
+
+.square.selected {
+  background-color: #ec6767;
+}
+
+.square.hitbox {
+  position: relative;
+  background-color: rgba(94, 247, 71, 0.2);
+}
+
+.square.available {
+  position: relative;
+}
+
+.square.available::before {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 30%;
+  height: 30%;
+  top: 35%;
+  left: 35%;
+  user-select: none;
+  pointer-events: none;
+  background-color: #4ebb4e;
+  border-radius: 50%;
 }
 
 .figure {

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import BoardComponent from "./compontents/BoardComponent"
 import { Board } from "./models/Board";
+import { Square } from "./models/Square";
 
 function App() {
   const [board, setBoard] = useState(new Board());
@@ -14,12 +15,11 @@ function App() {
 
   useEffect(() => {
     restart();
-
   }, [])
 
   return (
     <div className="app">
-      <BoardComponent board={board} setBoard={restart} />
+      <BoardComponent board={board} setBoard={setBoard} />
     </div>
   )
 }

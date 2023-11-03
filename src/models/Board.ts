@@ -8,11 +8,10 @@ import { Queen } from "./figures/Queen";
 import { Rook } from "./figures/Rook";
 
 export class Board {
+    squares: Square[][];
     constructor() {
         this.squares = []; // Initialize the squares array here.
     }
-
-    squares: Square[][];
 
     public initSquares() {
         // i is a row iterations, j is a squares in it
@@ -29,45 +28,71 @@ export class Board {
         }
     }
 
+    public highlightSquares(selectedSquare: Square | null) {
+        for (let i = 0; i < this.squares.length; i++) {
+            const row = this.squares[i]
+            for (let j = 0; j < row.length; j++) {
+                const target = row[j];
+                target.available = !!selectedSquare?.figure.canMove(target)
+            }
+        }
+    }
+
+    public getCopyBoard(): Board {
+        const newBoard = new Board();
+        newBoard.squares = this.squares
+        return newBoard
+    }
+
     public getSqaure(x: number, y: number) {
         return this.squares[y][x]
     }
 
-    public addFigures() {
-        // BLACK PIECES 
-        new Pawn(this.getSqaure(0, 1), COLORS.BLACK)
-        new Pawn(this.getSqaure(1, 1), COLORS.BLACK)
-        new Pawn(this.getSqaure(2, 1), COLORS.BLACK)
-        new Pawn(this.getSqaure(3, 1), COLORS.BLACK)
-        new Pawn(this.getSqaure(4, 1), COLORS.BLACK)
-        new Pawn(this.getSqaure(5, 1), COLORS.BLACK)
-        new Pawn(this.getSqaure(6, 1), COLORS.BLACK)
-        new Pawn(this.getSqaure(7, 1), COLORS.BLACK)
+    private addPawns() {
+        for (let i = 0; i < 8; i++) {
+            new Pawn(this.getSqaure(i, 1), COLORS.BLACK)
+            new Pawn(this.getSqaure(i, 6), COLORS.WHITE)
+        }
+    }
+
+    private addKings() {
+        new King(this.getSqaure(4, 0), COLORS.BLACK)
+        new King(this.getSqaure(4, 7), COLORS.WHITE)
+
+    }
+    private addQueens() {
+        new Queen(this.getSqaure(3, 0), COLORS.BLACK)
+        new Queen(this.getSqaure(3, 7), COLORS.WHITE)
+
+    }
+    private addRooks() {
         new Rook(this.getSqaure(0, 0), COLORS.BLACK)
         new Rook(this.getSqaure(7, 0), COLORS.BLACK)
-        new Knight(this.getSqaure(6, 0), COLORS.BLACK)
-        new Knight(this.getSqaure(1, 0), COLORS.BLACK)
-        new Bishop(this.getSqaure(5, 0), COLORS.BLACK)
-        new Bishop(this.getSqaure(2, 0), COLORS.BLACK)
-        new Queen(this.getSqaure(4, 0), COLORS.BLACK)
-        new King(this.getSqaure(3, 0), COLORS.BLACK)
-
-        // WHITE PIECES 
-        new Pawn(this.getSqaure(0, 6), COLORS.WHITE)
-        new Pawn(this.getSqaure(1, 6), COLORS.WHITE)
-        new Pawn(this.getSqaure(2, 6), COLORS.WHITE)
-        new Pawn(this.getSqaure(3, 6), COLORS.WHITE)
-        new Pawn(this.getSqaure(4, 6), COLORS.WHITE)
-        new Pawn(this.getSqaure(5, 6), COLORS.WHITE)
-        new Pawn(this.getSqaure(6, 6), COLORS.WHITE)
-        new Pawn(this.getSqaure(7, 6), COLORS.WHITE)
         new Rook(this.getSqaure(0, 7), COLORS.WHITE)
         new Rook(this.getSqaure(7, 7), COLORS.WHITE)
-        new Knight(this.getSqaure(6, 7), COLORS.WHITE)
-        new Knight(this.getSqaure(1, 7), COLORS.WHITE)
+
+    }
+    private addBishops() {
+        new Bishop(this.getSqaure(5, 0), COLORS.BLACK)
+        new Bishop(this.getSqaure(2, 0), COLORS.BLACK)
         new Bishop(this.getSqaure(5, 7), COLORS.WHITE)
         new Bishop(this.getSqaure(2, 7), COLORS.WHITE)
-        new Queen(this.getSqaure(4, 7), COLORS.WHITE)
-        new King(this.getSqaure(3, 7), COLORS.WHITE)
+
+    }
+    private addKnights() {
+        new Knight(this.getSqaure(6, 0), COLORS.BLACK)
+        new Knight(this.getSqaure(1, 0), COLORS.BLACK)
+        new Knight(this.getSqaure(6, 7), COLORS.WHITE)
+        new Knight(this.getSqaure(1, 7), COLORS.WHITE)
+
+    }
+
+    public addFigures() {
+        this.addPawns()
+        this.addKings()
+        this.addQueens()
+        this.addRooks()
+        this.addBishops()
+        this.addKnights()
     }
 }

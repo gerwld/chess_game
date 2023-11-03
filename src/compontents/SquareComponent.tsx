@@ -1,21 +1,34 @@
 import * as React from 'react'
 import { COLORS } from '../models/Colors'
+import { Square } from '../models/Square'
 
 interface SquareProps {
     color: COLORS,
     key: number,
-    figure: any
+    figure: any,
+    selected: boolean,
+    click: (square: Square) => void,
+    square: Square
 }
 
-const SquareComponent: React.FC<SquareProps> = ({ color, figure }) => {
+const SquareComponent: React.FC<SquareProps> = ({ square, color, figure, selected, click }) => {
+
     return (
-        <div className={["square", color].join(" ")}>{
-            figure?.logo ?
-                <div className='figure'>
-                    <img src={figure?.logo} className='figure_logo' draggable="false" />
-                </div>
-                : ""
-        }</div>
+        <div
+            onClick={() => click(square)}
+            className={[
+                "square",
+                color,
+                selected ? "selected" : "",
+                square.available && !square.figure ? "available" : "",
+                square.available && square.figure ? "hitbox" : ""].join(" ")
+            }>{
+                figure?.logo ?
+                    <div className='figure'>
+                        <img src={figure?.logo} className='figure_logo' draggable="false" />
+                    </div>
+                    : ""
+            }</div>
     )
 }
 

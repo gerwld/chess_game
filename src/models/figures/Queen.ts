@@ -9,7 +9,5 @@ export class Queen extends Figure {
         super(square, color);
         this.logo = color === COLORS.BLACK ? bq : wq;
         this.name = FigureNames.QUEEN
-        console.log(this);
-
     }
 }

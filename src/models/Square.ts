@@ -8,7 +8,7 @@ export class Square {
     readonly color: COLORS;
     figure: Figure | null;
     board: Board;
-    avalable: boolean; // If selected piece can be placed on THIS sqare or not
+    available: boolean; // If selected piece can be placed on THIS sqare or not
     id: number; // For react keys
 
     constructor(board: Board, x: number, y: number, color: COLORS, figure: Figure | null) {
@@ -16,6 +16,7 @@ export class Square {
         this.y = y;
         this.board = board;
         this.color = color;
+        this.available = false;
         this.figure = figure;
         this.id = Math.random() + Math.random();
     }
