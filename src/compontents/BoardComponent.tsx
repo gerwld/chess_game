@@ -8,11 +8,13 @@ interface BoardProps {
 }
 
 const BoardComponent: React.FC<BoardProps> = ({ board, setBoard }) => {
+    console.log(board);
+
     return (
         <div className='board'>
             {board.squares.map((row, index) =>
                 <React.Fragment key={index}>
-                    {row.map((square, il) => <SquareComponent color={square.color} id={square.id} />)}
+                    {row.map((square, il) => <SquareComponent color={square.color} key={square.id} figure={square.figure} />)}
                 </React.Fragment>)}
         </div>
 
