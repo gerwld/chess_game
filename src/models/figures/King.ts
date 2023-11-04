@@ -11,10 +11,19 @@ export class King extends Figure {
         this.name = FigureNames.KING
     }
 
+    canKingMove(target: Square): boolean {
+        const absX = Math.abs(target.x - this.square.x)
+        const absY = Math.abs(target.y - this.square.y)
+        if (absX <= 1 && absY <= 1)
+            return true
+    }
+
     canMove(target: Square): boolean {
         if (!super.canMove(target)) {
             return false;
         }
-        return true;
+        if (this.canKingMove(target))
+            return true
+        return false;
     }
 }
