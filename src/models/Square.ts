@@ -25,6 +25,13 @@ export class Square {
         return this.figure === null
     }
 
+    isEnemy(target: Square): boolean {
+        if (target.figure) {
+            return this.figure.color !== target.figure.color
+        }
+        return false;
+    }
+
     setFigure(figure: Figure) {
         this.figure = figure;
         this.figure.square = this;

@@ -13,7 +13,7 @@ export class Pawn extends Figure {
 
 
     // Перевірка на хід тільки вперед. Перша верхня координата 0.0
-    public isForward(target: Square): boolean {
+    isForward(target: Square): boolean {
         if (this.color === COLORS.WHITE && target.y < this.square.y) {
             return true;
         }
@@ -22,7 +22,7 @@ export class Pawn extends Figure {
         }
     }
 
-    public isFirstMoveNextTwoSqares(target: Square): boolean {
+    isFirstMoveNextTwoSqares(target: Square): boolean {
         if (this.color === COLORS.WHITE
             && this.square.y === 6
             && target.y > 3) {
@@ -35,7 +35,7 @@ export class Pawn extends Figure {
         }
     }
 
-    public isForwardSqare(target: Square): boolean {
+    isForwardSqare(target: Square): boolean {
         if (this.color === COLORS.WHITE
             && target.y === this.square.y - 1) {
             return true
@@ -46,9 +46,29 @@ export class Pawn extends Figure {
         }
     }
 
-
     isEmpty(target: Square): boolean {
         return target.figure === null
+    }
+
+    isEnemyDiagonale(target: Square): boolean {
+        const dx = Math.abs(target.x - this.square.x)
+        const diffY = target.y - this.square.y
+
+        // Якщо противника немає то і ходу по діагоналі також
+        if (!this.square.isEnemy(target)) {
+            return false
+        }
+
+        if (this.color === COLORS.WHITE
+            && dx === 1
+            && diffY === -1) {
+            return true
+        }
+        if (this.color === COLORS.BLACK
+            && dx === 1
+            && diffY === 1) {
+            return true
+        }
     }
 
 
@@ -56,6 +76,10 @@ export class Pawn extends Figure {
         if (!super.canMove(target)) {
             return false;
         }
+        if (this.isEnemyDiagonale(target)) {
+            return true
+        }
+
         if (!this.square.isEmptyVertical(target)) {
             return false;
         }
