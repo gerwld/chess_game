@@ -10,4 +10,14 @@ export class Queen extends Figure {
         this.logo = color === COLORS.BLACK ? bq : wq;
         this.name = FigureNames.QUEEN
     }
+
+    canMove(target: Square): boolean {
+        if (!super.canMove(target)) {
+            return false;
+        }
+        if (this.square.isEmptyVertical(target)) {
+            return true
+        }
+        return false;
+    }
 }

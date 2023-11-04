@@ -10,4 +10,16 @@ export class Rook extends Figure {
         this.logo = color === COLORS.BLACK ? br : wr;
         this.name = FigureNames.ROOK
     }
+
+    canMove(target: Square): boolean {
+        if (!super.canMove(target)) {
+            return false;
+        }
+
+        if (!this.square.isEmptyVertical(target) && !this.square.isEmptyHorizontal(target)) {
+            return false;
+        }
+
+        return true;
+    }
 }

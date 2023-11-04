@@ -20,8 +20,8 @@ const SquareComponent: React.FC<SquareProps> = ({ square, color, figure, selecte
                 "square",
                 color,
                 selected ? "selected" : "",
-                square.available && !square.figure ? "available" : "",
-                square.available && square.figure ? "hitbox" : ""].join(" ")
+                !selected && square.available && !square.figure ? "available" : "",
+                !selected && square.available && square.figure ? "hitbox" : ""].join(" ")
             }>{
                 figure?.logo ?
                     <div className='figure'>

@@ -9,12 +9,19 @@ interface BoardProps {
 }
 
 const BoardComponent: React.FC<BoardProps> = ({ board, setBoard }) => {
-    const [, forceUpdate] = React.useReducer(x => x + 1, 0);
     const [selectedSquare, setSelectedSquare] = React.useState<Square | null>(null);
 
     function click(square: Square) {
-        if (square.figure)
+        if (selectedSquare && selectedSquare !== square && selectedSquare.figure?.canMove(square)) {
+            selectedSquare.moveFigure(square)
+            setSelectedSquare(null);
+        }
+        else if (square?.y === selectedSquare?.y && square?.x === selectedSquare?.x) {
+            setSelectedSquare(null)
+        }
+        else if (square.figure)
             setSelectedSquare(square);
+
     }
 
     function hightlightSquares() {
@@ -25,7 +32,6 @@ const BoardComponent: React.FC<BoardProps> = ({ board, setBoard }) => {
     function updateBoard() {
         const newBoard = board.getCopyBoard();
         setBoard(newBoard)
-        forceUpdate()
     }
 
     React.useEffect(() => {
