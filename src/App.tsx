@@ -14,8 +14,9 @@ function App() {
   function restart() {
     const newBoard = new Board();
     newBoard.initSquares();
-    newBoard.addFigures()
+    newBoard.addFigures();
     setBoard(newBoard);
+    setCurrentPlayer(wPlayer);
   }
 
   function swapPlayer() {
@@ -29,7 +30,7 @@ function App() {
 
   return (
     <div className="app">
-      <BoardComponent board={board} setBoard={setBoard} currentPlayer={currentPlayer} swapPlayer={swapPlayer} />
+      <BoardComponent board={board} setBoard={setBoard} currentPlayer={currentPlayer} swapPlayer={swapPlayer} restart={restart} />
     </div>
   )
 }
