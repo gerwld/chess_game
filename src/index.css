@@ -6,7 +6,7 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  background-color: var(--main-color, #242424);
   font-family: monospace;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -15,9 +15,14 @@
   -webkit-text-size-adjust: 100%;
 
   --aside-gap: 15px;
-  --border-radius-main: 7px;
+  --border-radius-main: 4px;
   --board-square-size: max(10vmin, 30px);
   --board-size: calc(var(--board-square-size, max(10vmin, 30px)) * 8);
+
+  --main-color: #242424;
+  --sec-color: #36363b;
+  --hover-color: #2b2b2d;
+  --border-color: #505256;
 }
 
 * {
@@ -38,6 +43,13 @@ button {
   margin-top: 20px;
   font-size: 1rem;
   font-weight: 500;
+  border-radius: var(--border-radius-main);
+  background-color: var(--sec-color, gray);
+  border: 1px solid var(--border-color);
+}
+
+button:hover {
+  background-color: var(--hover-color);
 }
 
 .app {
@@ -155,42 +167,6 @@ aside {
   justify-content: center;
 }
 
-@media only screen and (max-width: 820px) {
-  .app {
-    flex-direction: column;
-  }
-
-  aside {
-    margin: 30px auto;
-  }
-}
-
-@media only screen and (max-width: 660px) {
-
-  .app {
-    padding-top: max(2vmin, 10px);
-    justify-content: center;
-    align-items: flex-start;
-  }
-
-  .board {
-    width: calc(max(12vmin, 30px) *8);
-    min-width: calc(max(12vmin, 30px) *8);
-    height: calc(max(12vmin, 30px) *8);
-    min-height: calc(max(12vmin, 30px) *8);
-    display: flex;
-    flex-wrap: wrap;
-  }
-
-  .square {
-    width: max(12vmin, 30px);
-    height: max(12vmin, 30px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-}
 
 .square.black {
   /* background-color: #000; */
@@ -256,4 +232,61 @@ aside {
 .session_timer__white {
   top: unset;
   bottom: 0;
+}
+
+.captured__piece[title="Pawn"] {
+  order: 2;
+  margin-right: -20px;
+}
+
+
+@media only screen and (max-width: 820px) {
+  .app {
+    flex-direction: column;
+  }
+
+  aside {
+    margin: 0;
+    padding: 30px auto;
+    width: var(--board-size);
+    justify-content: flex-start;
+    padding: 60px 0 0;
+  }
+
+  .captured {
+    margin-top: 10px;
+  }
+
+  .session_timer {
+    padding: 10px;
+  }
+
+  .session_timer__black {
+    background-color: #000;
+    color: #fff;
+    top: 5px;
+    right: 0;
+    left: unset;
+  }
+
+  .session_timer__white {
+    background-color: #fff;
+    color: #000;
+    top: 5px;
+    bottom: unset;
+    right: unset;
+    left: 0;
+  }
+}
+
+@media only screen and (max-width: 660px) {
+  :root {
+    --board-square-size: max(12vmin, 30px);
+  }
+
+  .app {
+    padding-top: max(2vmin, 10px);
+    justify-content: flex-start;
+    align-items: center;
+  }
 }

@@ -37,11 +37,11 @@ const BoardComponent: React.FC<BoardProps> = ({ board, setBoard, swapPlayer, cur
 
     // timer logic 
     function decrementBlackTimer() {
-        setBlackTime(prev => prev - 1)
+        setBlackTime(prev => prev > 0 ? prev - 1 : 0)
     }
 
     function decrementWhiteTimer() {
-        setWhiteTime(prev => prev - 1)
+        setWhiteTime(prev => prev > 0 ? prev - 1 : 0)
     }
 
     function startTimer() {

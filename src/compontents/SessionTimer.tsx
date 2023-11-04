@@ -10,7 +10,7 @@ interface SessionProps {
 const SessionTimer = ({ isBlack, currentPlayer, time }) => {
     const min = Math.floor(time / 60),
         sec = time - (min * 60)
-    if (currentPlayer && time)
+    if (currentPlayer && time || time === 0)
         return (
             <div className={[
                 "session_timer",
