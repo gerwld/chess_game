@@ -67,7 +67,25 @@ export class Square {
     }
 
     public isEmptyDiagonal(target: Square): boolean {
-        return true;
+        // Дізнаємось різницю поміж this і таргетом 
+        const absX = Math.abs(target.x - this.x);
+        const absY = Math.abs(target.y - this.y);
+
+        // Якщо залежність не рівна значить це не діагональ, вертаємо фолс
+        if (absX !== absY)
+            return false
+
+        // Дізнаємось чи відємна залежність щоб потім умножити
+        const dy = this.y < target.y ? 1 : -1;
+        const dx = this.x < target.x ? 1 : -1;
+
+        // По будь-якій абс проходимо циклом (відстань від this до таргета включно)
+        for (let i = 1; i < absX; i++) {
+            // Клітинка в проміжку від this до таргета
+            if (!this.board.getSqaure((this.x + (i * dx)), (this.y + (i * dy))).isEmpty()) {
+                return false;
+            }
+        } return true;
     }
 
     public moveFigure(target: Square) {

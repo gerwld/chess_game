@@ -23,19 +23,34 @@ export class Pawn extends Figure {
     }
 
     public isFirstMoveNextTwoSqares(target: Square): boolean {
-        // Якщо колір білий, і різниця максимум 2 і початкова клітинка 7
         if (this.color === COLORS.WHITE
             && this.square.y === 6
             && target.y > 3) {
             return true;
         }
+        if (this.color === COLORS.BLACK
+            && this.square.y === 1
+            && target.y < 4) {
+            return true;
+        }
     }
 
     public isForwardSqare(target: Square): boolean {
-        if (target.y === this.square.y - 1) {
+        if (this.color === COLORS.WHITE
+            && target.y === this.square.y - 1) {
+            return true
+        }
+        if (this.color === COLORS.BLACK
+            && target.y === this.square.y + 1) {
             return true
         }
     }
+
+
+    isEmpty(target: Square): boolean {
+        return target.figure === null
+    }
+
 
     canMove(target: Square): boolean {
         if (!super.canMove(target)) {
@@ -52,6 +67,9 @@ export class Pawn extends Figure {
             return true;
         }
         if (!this.isForwardSqare(target)) {
+            return false;
+        }
+        if (!this.isEmpty(target)) {
             return false;
         }
 

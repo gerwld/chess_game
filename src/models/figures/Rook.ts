@@ -15,11 +15,9 @@ export class Rook extends Figure {
         if (!super.canMove(target)) {
             return false;
         }
-
         if (!this.square.isEmptyVertical(target) && !this.square.isEmptyHorizontal(target)) {
             return false;
         }
-
         return true;
     }
 }
