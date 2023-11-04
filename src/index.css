@@ -1,6 +1,7 @@
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
+  font-size: 15px;
   font-weight: 400;
 
   color-scheme: light dark;
@@ -27,6 +28,65 @@
   align-items: center;
   overflow: scroll;
 }
+
+aside {
+  order: 1;
+  padding-left: 15px;
+  font-size: 1rem;
+}
+
+.captured {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-start;
+  user-select: none;
+  min-height: 35px;
+  margin-top: 20px;
+  border: 1px solid #313131;
+  border-radius: 7px;
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 5px;
+  box-sizing: border-box;
+}
+
+.captured__piece {
+  width: 25px;
+  height: 25px;
+  overflow: hidden;
+}
+
+.captured__piece img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.current_player {
+  display: block;
+  width: 200px;
+  font-family: monospace;
+  font-weight: 600;
+  box-sizing: border-box;
+}
+
+.current_player::before {
+  content: '';
+  display: inline-block;
+  line-height: inherit !important;
+  width: 1em;
+  height: 1em;
+  margin: 0 0.5em -0.2em 0;
+  background-color: #fff;
+  border-radius: 2px;
+  border: 1px solid #000;
+}
+
+.current_player__bl::before {
+  background-color: #000000;
+  border-color: #fff;
+}
+
 
 .board,
 .board>* {

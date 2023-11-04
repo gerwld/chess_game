@@ -1,6 +1,7 @@
 import { COLORS } from "./Colors";
 import { Square } from "./Square";
 import { Bishop } from "./figures/Bishop";
+import { Figure } from "./figures/Figure";
 import { King } from "./figures/King";
 import { Knight } from "./figures/Knight";
 import { Pawn } from "./figures/Pawn";
@@ -9,6 +10,8 @@ import { Rook } from "./figures/Rook";
 
 export class Board {
     squares: Square[][];
+    lostBlackFigures: Figure[] = []
+    lostWhiteFigures: Figure[] = []
     constructor() {
         this.squares = []; // Initialize the squares array here.
     }
@@ -41,6 +44,8 @@ export class Board {
     public getCopyBoard(): Board {
         const newBoard = new Board();
         newBoard.squares = this.squares
+        newBoard.lostBlackFigures = this.lostBlackFigures
+        newBoard.lostWhiteFigures = this.lostWhiteFigures
         return newBoard
     }
 

@@ -3,6 +3,7 @@ import { Board } from "../models/Board"
 import SquareComponent from "./SquareComponent"
 import { Square } from '../models/Square'
 import { Player } from '../models/Player'
+import CapturedFigures from './CapturedFigures'
 import { COLORS } from '../models/Colors'
 
 interface BoardProps {
@@ -43,9 +44,21 @@ const BoardComponent: React.FC<BoardProps> = ({ board, setBoard, swapPlayer, cur
         hightlightSquares()
     }, [selectedSquare])
 
+    console.log(board.lostBlackFigures);
+
+
     return (
         <>
-            <span>{currentPlayer?.color} to move</span>
+            <aside>
+                <span className={
+                    ['current_player',
+                        currentPlayer?.color === COLORS.BLACK ? "current_player__bl" : "current_player__wh"].join(" ")
+                }>
+                    {currentPlayer?.color} to move
+                </span>
+                <CapturedFigures figures={board.lostBlackFigures} />
+                <CapturedFigures figures={board.lostWhiteFigures} />
+            </aside>
             <div className='board'>
                 {board.squares.map((row, index) =>
                     <React.Fragment key={index}>
@@ -59,6 +72,7 @@ const BoardComponent: React.FC<BoardProps> = ({ board, setBoard, swapPlayer, cur
                                 selected={square.x === selectedSquare?.x && square.y === selectedSquare?.y} />)}
                     </React.Fragment>)}
             </div>
+
         </>
 
     )

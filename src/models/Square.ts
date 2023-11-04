@@ -95,9 +95,17 @@ export class Square {
         } return true;
     }
 
+    public addCapturedFigure(figure: Figure) {
+        figure.color === COLORS.BLACK ?
+            this.board.lostBlackFigures.push(figure)
+            : this.board.lostWhiteFigures.push(figure)
+    }
+
     public moveFigure(target: Square) {
         if (this.figure && this.figure?.canMove(target)) {
-            this.figure?.moveFigure(target)
+            if (target.figure) {
+                this.addCapturedFigure(target.figure)
+            }
             target.setFigure(this.figure);
             this.figure = null;
         }
