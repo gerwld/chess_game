@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react"
 import BoardComponent from "./compontents/BoardComponent"
 import { Board } from "./models/Board";
-import { Square } from "./models/Square";
 import { Player } from "./models/Player";
 import { COLORS } from "./models/Colors";
 

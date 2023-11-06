@@ -68,8 +68,6 @@ const BoardComponent: React.FC<BoardProps> = ({ board, setBoard, swapPlayer, cur
     }, [currentPlayer])
 
 
-
-
     function hightlightSquares() {
         board.highlightSquares(selectedSquare);
         updateBoard();
@@ -83,8 +81,6 @@ const BoardComponent: React.FC<BoardProps> = ({ board, setBoard, swapPlayer, cur
     React.useEffect(() => {
         hightlightSquares()
     }, [selectedSquare])
-
-    console.log(board.lostBlackFigures);
 
 
     return (
